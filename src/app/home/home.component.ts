@@ -16,4 +16,5 @@ export class HomeComponent {
   toggleDeals() {
     this.showDeals = !this.showDeals;
   }
+
 }
