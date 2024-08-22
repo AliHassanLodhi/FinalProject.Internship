@@ -1,21 +1,33 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { SigninComponent } from './signin/signin.component'; 
-import { HomeComponent } from './home/home.component';
-import { SignupUserComponent } from './signup-user/signup-user.component';
-import { AboutComponent } from './about/about.component';
-import { MenuComponent } from './menu/menu.component';
-import { ContactComponent } from './contact/contact.component';
+import { SigninComponent } from './user/components/signin/signin.component'; 
+import { HomeComponent } from './user/components/home/home.component';
+import { SignupUserComponent } from './user/components/signup-user/signup-user.component';
+import { AboutComponent } from './user/components/about/about.component';
+import { MenuComponent } from './user/components/menu/menu.component';
+import { ContactComponent } from './user/components/contact/contact.component';
+import { CartComponent } from './user/components/cart/cart.component';
+import { ProfileComponent } from './user/components/profile/profile.component';
+import { OrdersComponent } from './user/components/orders/orders.component';
+import { AuthGuard } from './user/services/auth-service/auth.service.spec';
+import { LoginComponent } from './admin/login/login.component';
 
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
-  { path: 'about', component: AboutComponent },
-  { path: 'menu', component: MenuComponent },
+  { path: 'about', component: AboutComponent, canActivate: [AuthGuard] },
+  { path: 'menu', component: MenuComponent, canActivate: [AuthGuard] },
   { path: 'signin', component: SigninComponent },
   { path: 'signup', component: SignupUserComponent },
-  { path: 'contact', component: ContactComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' }, // Default route
-  { path: '**', redirectTo: '/home' } // Wildcard route for 404
+  { path: 'login', component: LoginComponent },
+  { path: 'cart', component: CartComponent, canActivate: [AuthGuard] },
+  { path: 'orders', component: OrdersComponent, canActivate: [AuthGuard]},
+  { path: 'contact', component: ContactComponent, canActivate: [AuthGuard] },
+  { path: 'profile', component: ProfileComponent, canActivate: [AuthGuard] },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '**', redirectTo: '/home' } ,
+
+  { path: 'login', component: LoginComponent },
+
 ];
 
 @NgModule({
